@@ -79,17 +79,25 @@ class Article:
             raise TypeError("magazine must be an instance of Magazine")
         if not isinstance(title, str) or not (5 <= len(title) <=50): 
             raise TypeError("title must be string between 5 and 50 characters")
+        
+        #private attributes
         self._title = title
-        self._author = author  #private attributes
+        self._author = author  
         self._magazine = magazine
         
         Article.all.append(self)    
+        
         
     @property
     def author(self):
         return self._author
     
-   
+    @author.setter
+    def author(self, value):
+        if not isinstance(value, Author):
+            raise TypeError("author must be an instance of Author")
+        self._author = value
+    
     @property
     def magazine(self):
         return self._magazine
@@ -99,13 +107,7 @@ class Article:
         if not isinstance(value, Magazine): 
             raise TypeError("magazine must be an instance of Magazine")
         self._magazine = value
-         
-    @author.setter
-    def author(self, value):
-        if not isinstance(value, Author):
-            raise TypeError("author must be an instance of Author")
-        self._author = value
-             
+        
     @property
     def title(self):
         return self._title

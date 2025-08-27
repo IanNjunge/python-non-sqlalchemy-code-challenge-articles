@@ -13,12 +13,11 @@ class Author:
         return [article for article in Article.all if article.author is self]
     
     #Magazines author is a part of
-    @property
     def magazines(self):
         return list({article.magazine for article in self.articles()})
     
     #new article for author
-    def add_articles(self, magazine, title):
+    def add_article(self, magazine, title):
         return Article(self, magazine, title)
     
     #topics author wrote about
@@ -66,6 +65,7 @@ class Magazine:
     #authors of more than 2 articles
     def contributing_authors(self):
         authors = [article.author for article in self.articles()]
+        return [author for author in set(authors) if authors.count(author) > 2]
     
     
 class Article:

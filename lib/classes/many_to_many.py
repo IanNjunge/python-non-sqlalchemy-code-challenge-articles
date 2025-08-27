@@ -1,38 +1,28 @@
 class Article:
+    all = [] #store every article created
+    
     def __init__(self, author, magazine, title):
-        self.author = author
-        self.magazine = magazine
-        self.title = title
+        from author import Author
+        from magazine import Magazine
         
-class Author:
-    def __init__(self, name):
-        self.name = name
-
-    def articles(self):
-        pass
-
-    def magazines(self):
-        pass
-
-    def add_article(self, magazine, title):
-        pass
-
-    def topic_areas(self):
-        pass
-
-class Magazine:
-    def __init__(self, name, category):
-        self.name = name
-        self.category = category
-
-    def articles(self):
-        pass
-
-    def contributors(self):
-        pass
-
-    def article_titles(self):
-        pass
-
-    def contributing_authors(self):
-        pass
+        if not isinstance(author, Author): raise TypeError("author must be an instance of Author class")
+        if not isinstance(magazine, Magazine): raise TypeError("magazine must be an instance of Magazine class")
+        if not isinstance(title, str)or not(5 <=len(title) <= 50): raise TypeError("title must be a string of 5 to 50 characters")
+            
+        self._author = author
+        self._magazine = magazine
+        self._title = title
+        Article.all.append(self)    
+        
+    @property
+    def author(self):
+        return self._author
+    
+    @property
+    def magazine(self):
+        return self._magazine
+         
+    @property
+    def title(self):
+        return self._title
+              
